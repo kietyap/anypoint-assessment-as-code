@@ -1,4 +1,4 @@
-# Anypoint Platform Live Hierarchy Report - Workflow Execution Guide
+# Anypoint Platform Assessment Report - Workflow Execution Guide
 
 **Purpose:** This workflow guide contains the step-by-step process for generating comprehensive Anypoint Platform hierarchy reports using MuleSoft MCP Server Tools and Enhanced Dynamic Discovery.
 
