@@ -31,22 +31,22 @@
 │    └─── 📁 [Environment Name] ([env-id])
 │         ├─── 🔵 SYSTEM APIS ([X] apps)
 │         │    ├─── [api-name] ✅ RUNNING
-│         │    │    ├─── 💾 CloudHub 2.0: [X] vCore × [X] replica
-│         │    │    ├─── 📈 Flows: [X] | Messages: [X] | Data: [X] GB throughput
-│         │    │    ├─── 👥 Consumers: [X] | 🛡️ API Policies: [X] ([Policy Names])
+│         │    │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
+│         │    │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
+│         │    │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
 │         │    │    └─── 🕒 Last Updated: [Date]
 │         ├─── 🟢 PROCESS APIS ([X] apps)
 │         │    ├─── [api-name] ✅ RUNNING
-│         │    │    ├─── 💾 CloudHub 2.0: [X] vCore × [X] replica
-│         │    │    ├─── 📈 Flows: [X] | Messages: [X] | Data: [X] GB throughput
-│         │    │    ├─── 👥 Consumers: [X] | 🛡️ API Policies: [X] ([Policy Names])
+│         │    │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
+│         │    │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
+│         │    │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
 │         │    │    └─── 🕒 Last Updated: [Date]
 │         └─── 🟠 EXPERIENCE APIS ([X] apps)
 │              └─── [api-name] ✅ RUNNING
-│                   ├─── 💾 CloudHub 2.0: [X] vCore × [X] replica
-│                   ├─── 📈 Flows: [X] | Messages: [X] | Data: [X] GB throughput
-│                   ├─── 👥 Consumers: [X] | 🛡️ API Policies: [X] ([Policy Names])
-│                   └─── 🕒 Last Updated: [Date]
+│         │    │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
+│         │    │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
+│         │    │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
+│         │    │    └─── 🕒 Last Updated: [Date]
 ```
 
 ---

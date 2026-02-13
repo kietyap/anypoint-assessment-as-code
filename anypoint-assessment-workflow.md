@@ -362,18 +362,17 @@ Before saving the report, verify that NO application appears as:
 
 All applications must appear as:
 ```
-✅ CORRECT: ├─── application-name ✅ RUNNING
-           │    ├─── 💾 CloudHub 2.0: 0.1 vCore × 1 replica
-           │    ├─── 📈 Flows: N/S | Messages: N/S | Data: N/S GB throughput
-           │    ├─── 👥 Consumers: 0 | 🛡️ API Policies: 0 (Not API Managed)
-           │    └─── 🕒 Last Updated: [Date]
-```
+✅ CORRECT: ├─── [application-name] [STATUS_ICON] [STATUS_TEXT]
+            │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
+            │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
+            │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
+            │    └─── 🕒 Last Updated: [Date]
 
 #### Step 4.3: Create Timestamped Report File
 Generate the report filename using current datetime:
 ```
-Format: anypoint-platform-hierarchy-report-YYYYMMDD-HHMMSS.md
-Example: anypoint-platform-hierarchy-report-20260212-211500.md
+Format: anypoint-platform-assessment-report-YYYYMMDD-HHMMSS.md
+Example: anypoint-platform-assessment-report-20260212-211500.md
 
 Use current datetime in Europe/Paris timezone for consistency
 ```
@@ -699,7 +698,7 @@ For each validated_env in validated_environments:
 # Step 5: Generate Timestamped Report
 load_template("anypoint-assessment-template.md")
 populate_template_with_dynamic_data(all_applications, validated_environments)
-save_report(f"anypoint-platform-hierarchy-report-{current_timestamp}.md")
+save_report(f"anypoint-platform-assessment-report-{current_timestamp}.md")
 ```
 
 ---
