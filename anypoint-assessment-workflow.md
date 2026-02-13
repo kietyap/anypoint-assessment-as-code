@@ -698,7 +698,7 @@ For each validated_env in validated_environments:
 # Step 5: Generate Timestamped Report
 load_template("anypoint-assessment-template.md")
 populate_template_with_dynamic_data(all_applications, validated_environments)
-save_report(f"anypoint-platform-assessment-report-{current_timestamp}.md")
+save_report(f"output/anypoint-platform-assessment-report-{current_timestamp}.md")
 ```
 
 ---
