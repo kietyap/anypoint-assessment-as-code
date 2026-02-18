@@ -1,14 +1,20 @@
 # Anypoint Platform Assessment Report - Workflow Execution Guide
 
-**Purpose:** This workflow guide contains the step-by-step process for generating comprehensive Anypoint Platform hierarchy reports using MuleSoft MCP Server Tools and Enhanced Dynamic Discovery.
+**Purpose:** This workflow guide contains the step-by-step process for generating comprehensive Anypoint Platform hierarchy reports using MuleSoft MCP Server Tools and Enhanced Dynamic Discovery. DO NOT IMPLEMENT THE WORKFLOW, JUST EXECUTE IT.
 
-**Output:** Generates timestamped reports using the `anypoint-assessment-template.md` template
+**Output:** Generates timestamped reports using the `anypoint-assessment-template.md` template. 
 
 ---
 
 ## 🛠️ **WORKFLOW EXECUTION STEPS**
 
-### Step 1: Get Platform Insights
+### Step 1: Parse Template
+```
+Parse anypoint-assessment-template.md to understand the data required for the final report
+```
+**Purpose:** Parse the template t
+
+### Step 1.1: Get Platform Insights
 ```
 Use MCP Tool: get_platform_insights
 Parameters:
@@ -19,7 +25,7 @@ Parameters:
 
 **Purpose:** Retrieve comprehensive platform metrics including flow counts, message volumes, and data throughput across all organizations and environments.
 
-### Step 1.5: Get Reuse Metrics
+### Step 1.2: Get Reuse Metrics
 ```
 Use MCP Tool: get_reuse_metrics
 Parameters:
@@ -38,6 +44,7 @@ From Step 1 results, build complete inventory:
 ```
 Platform Insights Analysis:
 - Extract ALL unique combinations: (org_id, org_name, env_id, env_name)
+- If the env_name is missing, ask the user to provide it before continuing
 - Create comprehensive organization/environment matrix
 - Note: Platform insights aggregates ALL environments across ALL organizations
 - Build discovery list for validation in Step 2.2
@@ -59,6 +66,7 @@ For each organization discovered in Step 2.1:
     Parameters:
     - environmentName: [discovered_environment_name]  # Dynamic from Step 2.1
     - organizationId: [discovered_org_id]             # Dynamic from Step 2.1
+    - includeCpuMetrics: true                         
     - page: 1
     
     If successful (applications returned or empty list):
@@ -341,9 +349,14 @@ Load the `anypoint-assessment-template.md` template file containing the report s
 **MANDATORY**: Every single application in the hierarchy MUST follow this EXACT detail structure format:
 ```
 ├─── [application-name] [STATUS_ICON] [STATUS_TEXT]
+│    ├─── ⚙️ Runtime: [Mule Version]
 │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
-│    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
-│    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
+│    ├─── 📈 CPU: [cpu_usage] | Flows: [count] | Messages: [count] | Data: [amount] GB 
+│    ├─── 👥 Consumers: [count]
+│    └─── 🔗 API Reference: [API Instance/ID or "Not Managed"]
+│    │     └─── 📋 Policies: [Policy1 v1.0] or "None"
+│    │     └─── 📋 Policies: [Policy2 v1.1] or "None"
+│    │           └─── 👤 Clients: [count] active contract(s) 
 │    └─── 🕒 Last Updated: [Date]
 ```
 
@@ -363,9 +376,14 @@ Before saving the report, verify that NO application appears as:
 All applications must appear as:
 ```
 ✅ CORRECT: ├─── [application-name] [STATUS_ICON] [STATUS_TEXT]
+            │    ├─── ⚙️ Runtime: [Mule Version]
             │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
-            │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
-            │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
+            │    ├─── 📈 CPU: [cpu_usage] | Flows: [count] | Messages: [count] | Data: [amount] GB 
+            │    ├─── 👥 Consumers: [count]
+            │    └─── 🔗 API Reference: [API Instance/ID or "Not Managed"]
+            │    │     └─── 📋 Policies: [Policy1 v1.0] or "None"
+            │    │     └─── 📋 Policies: [Policy2 v1.1] or "None" (when policy is related to client id enforcement)
+            │    │           └─── 👤 Clients: [count] active contract(s) 
             │    └─── 🕒 Last Updated: [Date]
 
 #### Step 4.3: Create Timestamped Report File

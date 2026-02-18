@@ -30,24 +30,47 @@
 ├─── 🏛️ [Organization Name] ([org-id])
 │    └─── 📁 [Environment Name] ([env-id])
 │         ├─── 🔵 SYSTEM APIS ([X] apps)
-│         │    ├─── [api-name] ✅ RUNNING
+│         │    ├─── [app-name] ✅ RUNNING
+│         │    │    ├─── ⚙️ Runtime: [Mule Version]
 │         │    │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
-│         │    │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
-│         │    │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
+│         │    │    ├─── 📈 CPU: [cpu_usage] | Flows: [count] | Messages: [count] | Data: [amount] GB 
+│         │    │    ├─── 👥 Consumers: [count]
+│         │    │    └─── 🔗 API Reference: [API Instance/ID or "Not Managed"]
+│         │    │    │     └─── 📋 Policies: [Policy1 v1.0] or "None"
+│         │    │    │     └─── 📋 Policies: [Policy2 v1.1] or "None" 
+│         │    │    │           └─── 👤 Clients: [count] active contract(s) (when policy is related to client id enforcement)
 │         │    │    └─── 🕒 Last Updated: [Date]
 │         ├─── 🟢 PROCESS APIS ([X] apps)
-│         │    ├─── [api-name] ✅ RUNNING
+│         │    ├─── [app-name] ✅ RUNNING
+│         │    │    ├─── ⚙️ Runtime: [Mule Version]
 │         │    │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
-│         │    │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
-│         │    │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
+│         │    │    ├─── 📈 CPU: [cpu_usage] | Flows: [count] | Messages: [count] | Data: [amount] GB 
+│         │    │    ├─── 👥 Consumers: [count]
+│         │    │    └─── 🔗 API Reference: [API Instance/ID or "Not Managed"]
+│         │    │    │     └─── 📋 Policies: [Policy1 v1.0] or "None"
+│         │    │    │     └─── 📋 Policies: [Policy2 v1.1] or "None" 
+│         │    │    │           └─── 👤 Clients: [count] active contract(s) (when policy is related to client id enforcement)
 │         │    │    └─── 🕒 Last Updated: [Date]
 │         └─── 🟠 EXPERIENCE APIS ([X] apps)
-│              └─── [api-name] ✅ RUNNING
+│         │    ├─── [app-name] ✅ RUNNING
+│         │    │    ├─── ⚙️ Runtime: [Mule Version]
 │         │    │    ├─── 💾 [Platform]: [vCores] vCore × [replicas] replica/worker
-│         │    │    ├─── ⚙️ Runtime: [Mule Version] | 📈 Flows: [count] | Messages: [count] | Data: [amount] GB throughput
-│         │    │    ├─── 👥 Consumers: [count] | 🛡️ API Policies: [count] ([Policy Names or "Not API Managed"])
+│         │    │    ├─── 📈 CPU: [cpu_usage] | Flows: [count] | Messages: [count] | Data: [amount] GB 
+│         │    │    ├─── 👥 Consumers: [count]
+│         │    │    └─── 🔗 API Reference: [API Instance/ID or "Not Managed"]
+│         │    │    │     └─── 📋 Policies: [Policy1 v1.0] or "None"
+│         │    │    │     └─── 📋 Policies: [Policy2 v1.1] or "None" 
+│         │    │    │           └─── 👤 Clients: [count] active contract(s) (when policy is related to client id enforcement)
 │         │    │    └─── 🕒 Last Updated: [Date]
-```
+│         └─── 🟡 API Proxies ([X] apis)
+│              └─── [api-name] ✅ RUNNING (when the api-name can not be match with an application above)
+│                   ├─── ⚙️ Runtime: [Mule or Flex Gateway] [Version]
+│                   └─── 🔗 API Reference: [API Instance/ID or "Not Managed"]
+│                   │     └─── 📋 Policies: [Policy1 v1.0] or "None"
+│                   │     └─── 📋 Policies: [Policy2 v1.1] or "None" 
+│                   │           └─── 👤 Clients: [count] active contract(s) (when policy is related to client id enforcement)
+│                   └─── 🕒 Last Updated: [Date]
+``
 
 ---
 
@@ -128,6 +151,7 @@
 - 🔵 **System APIs (SAPI)** - Backend system abstractions
 - 🟢 **Process APIs (PAPI)** - Business process orchestration  
 - 🟠 **Experience APIs (EAPI)** - Channel-specific interfaces
+- 🟡 **Proxies API** - Entries in list_api_instance but can't be matched with an app
 - ⚪ **Other Applications** - Utilities, demos, integrations
 - 🧪 **Special Applications** - High-resource or specialized apps
 
@@ -138,9 +162,12 @@
 - ❌ **STOPPED** - Application not running (includes NOT_RUNNING/UNDEPLOYED)
 - 🚨 **CRITICAL** - Application with severe issues (CrashLoopBackOff)
 
-### **New Metrics Icons:**
+### **Application Detail Icons:**
 - 👥 **Consumers** - Number of applications/systems consuming this API
 - 🛡️ **API Policies** - Applied API Manager policies (security, rate limiting, etc.)
+- 🔗 **API Reference** - API Manager instance details with dedicated sub-nodes
+- 📋 **Policies** - Detailed policy information (names and versions)
+- 👤 **Clients** - Subscribed client applications for the API instance
 
 ### **Environment Types:**
 - 📁 **Production** - Production environment
@@ -154,7 +181,7 @@
 
 ---
 
-**Template Version:** 2.3  
-**Last Updated:** February 12, 2026  
-**Enhancement:** Added API Management and Reuse Metrics to application details  
+**Template Version:** 2.4  
+**Last Updated:** February 14, 2026  
+**Enhancement:** Added comprehensive API Reference details including API Instance ID, Policy Names/Versions, and Subscribed Client Applications to application hierarchy  
 **Workflow Guide:** See `anypoint-assessment-workflow.md` for MCP tool execution steps

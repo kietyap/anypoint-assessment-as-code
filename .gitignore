@@ -1,6 +1,15 @@
 # Ignore all files in the output directory
 output/*
 
+# Ignore all files in the output directory
+state/*
+
+# Ignore all files in the output directory
+skills/*
+
+# Ignore all files in the output directory
+iterations/*
+
 # But keep the README.md file in output directory
 !output/README.md
 
