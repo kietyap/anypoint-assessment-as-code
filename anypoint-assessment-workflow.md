@@ -27,7 +27,6 @@ Purpose: Quick session validation to confirm:
 4. No cached or example data from previous sessions
 
 CRITICAL: This step MUST show YOUR actual organizations, not example data.
-If any hardcoded names appear (ANA, kiet.yap, B2B Partner Manager), 
 STOP and investigate session authentication.
 ```
 
@@ -605,7 +604,7 @@ EXAMPLE VALIDATION:
    Table shows: [Your-Org-Name] "Running" = 14
    → MUST FIX table to match hierarchy count
 
-🚨 CRITICAL: If ANY hardcoded organization names appear (ANA, kiet.yap, B2B Partner Manager), 
+🚨 CRITICAL: If ANY hardcoded organization names appear, 
 STOP workflow execution immediately and validate session authentication.
 
 4. Validate TOTALS row matches sum of all organization counts
@@ -614,7 +613,7 @@ CRITICAL SUCCESS CRITERIA:
 ✅ Every organization's table counts EXACTLY match hierarchy counts
 ✅ TOTALS row equals sum of all individual organization counts  
 ✅ No discrepancies between hierarchy display and status distribution table
-✅ Applications from platform insights but not in standard environments properly counted (e.g., kiet.yap org)
+✅ Applications from platform insights but not in standard environments properly counted 
 
 This validation prevents counting inconsistencies and ensures the status distribution table is 100% accurate based on the actual deployed hierarchy.
 ```
@@ -689,18 +688,13 @@ VALIDATION SUCCESS CRITERIA:
 ✅ Zero applications with incomplete detail structure  
 ✅ All required icons present (💾, 📈, 👥, 🕒)
 ✅ No applications listed with just status line
-🚨 NO hardcoded organization names (ANA, kiet.yap, B2B Partner Manager)
+🚨 NO hardcoded organization names 
 🚨 ALL organization names match current session scope from Step 0
 ```
 
 ##### 4.6.5: Hardcoded Organization Name Prevention
 ```
 🚨 MANDATORY SCAN: Before saving report, scan for hardcoded organization names
-
-FORBIDDEN PATTERNS (MUST NOT EXIST IN FINAL REPORT):
-❌ "ANA" (unless this is actually your organization name)
-❌ "kiet.yap" (unless this is actually your organization name)  
-❌ "B2B Partner Manager" (unless this is actually your organization name)
 
 VALIDATION PROCESS:
 1. Search report content for forbidden organization names
