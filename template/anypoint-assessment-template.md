@@ -1,8 +1,12 @@
 # Anypoint Platform Assessment Report Template
 
+**🚨 TEMPLATE FILE - NO ACTUAL DATA 🚨**  
+**All placeholders marked with [To be populated] will be replaced with live session data**
+
 **Generated:** [To be populated with current datetime - Format: Month DD, YYYY at HH:MM AM/PM (Timezone)]  
 **Data Source:** Live Anypoint Platform API with Environment Validation  
 **Analysis Method:** MuleSoft MCP Server Tools  
+**Session Scope:** [To be populated with current user's organizational access]  
 **Scope:** Complete organizational hierarchy across all environments
 
 ---

@@ -2,17 +2,40 @@
 
 **Purpose:** This workflow guide contains the step-by-step process for generating comprehensive Anypoint Platform hierarchy reports using MuleSoft MCP Server Tools and Enhanced Dynamic Discovery. DO NOT IMPLEMENT THE WORKFLOW, JUST EXECUTE IT.
 
-**Output:** Generates timestamped reports using the `anypoint-assessment-template.md` template. 
+**CRITICAL:** This workflow ONLY uses live data from your current MCP session. NO hardcoded organization names, NO example data, NO cached results. All organization and environment names are discovered dynamically from your active Anypoint Platform session.
+
+**Output:** Generates timestamped reports using the `anypoint-assessment-template.md` template.
 
 ---
 
 ## 🛠️ **WORKFLOW EXECUTION STEPS**
 
+### Step 0: Session Validation & Context Verification
+```
+MANDATORY FIRST STEP: Validate current MCP session and organizational context
+
+Use MCP Tool: get_platform_insights
+Parameters:
+- includeFlows: false
+- includeMessages: false  
+- includeDataThroughput: false
+
+Purpose: Quick session validation to confirm:
+1. MCP connectivity is working
+2. Current user's organizational scope
+3. Available organizations and environments
+4. No cached or example data from previous sessions
+
+CRITICAL: This step MUST show YOUR actual organizations, not example data.
+If any hardcoded names appear (ANA, kiet.yap, B2B Partner Manager), 
+STOP and investigate session authentication.
+```
+
 ### Step 1: Parse Template
 ```
 Parse anypoint-assessment-template.md to understand the data required for the final report
 ```
-**Purpose:** Parse the template t
+**Purpose:** Parse the template to understand required data structure
 
 ### Step 1.1: Get Platform Insights
 ```
@@ -295,7 +318,7 @@ For each unmatched_application:
   → Log: "No API instance found for {app_name}"
 
 AGILE MATCHING EXAMPLES:
-✅ ana-product-sapi ↔ product-sapi (contains strategy)
+✅ [org]-product-sapi ↔ product-sapi (contains strategy)
 ✅ server-info ↔ info-server-api (reverse_contains strategy) 
 ✅ checkout-flow ↔ checkout-papi (fuzzy/word overlap strategy)
 ✅ marketing-xapi ↔ marketplace-xapi (semantic strategy)
@@ -326,8 +349,8 @@ For each application in all_applications:
     → Flag as "Reuse metrics unavailable"
 
 Example Consumer Integration:
-✅ ana-product-sapi → 12 consumers (high reuse)
-✅ ana-checkout-papi → 3 consumers (moderate reuse)
+✅ [org]-product-sapi → 12 consumers (high reuse)
+✅ [org]-checkout-papi → 3 consumers (moderate reuse)
 💤 backend-info → 0 consumers (no reuse)
 ```
 
@@ -493,7 +516,7 @@ Classification Rules:
    - Applications with unique purposes → 🧪 Special Applications
 
 Example Classification:
-✅ ana-product-sapi → 🔵 System API (clear pattern)
+✅ [org]-product-sapi → 🔵 System API (clear pattern)
 ✅ mule-b2b-mcp → 🧪 Special Application (MCP pattern)
 ✅ unknown-app → ⚪ Other Application (no clear pattern)
 ```
@@ -574,13 +597,16 @@ For each organization in hierarchy:
 
 EXAMPLE VALIDATION:
 ✅ CORRECT: 
-   Hierarchy shows: ANA has 10 apps with ✅ status
-   Table shows: ANA "Running" = 10
+   Hierarchy shows: [Your-Org-Name] has 10 apps with ✅ status
+   Table shows: [Your-Org-Name] "Running" = 10
    
 ❌ INCORRECT:
-   Hierarchy shows: B2B Partner Manager has 11 apps with ✅ status  
-   Table shows: B2B Partner Manager "Running" = 14
+   Hierarchy shows: [Your-Org-Name] has 11 apps with ✅ status  
+   Table shows: [Your-Org-Name] "Running" = 14
    → MUST FIX table to match hierarchy count
+
+🚨 CRITICAL: If ANY hardcoded organization names appear (ANA, kiet.yap, B2B Partner Manager), 
+STOP workflow execution immediately and validate session authentication.
 
 4. Validate TOTALS row matches sum of all organization counts
 
@@ -663,6 +689,29 @@ VALIDATION SUCCESS CRITERIA:
 ✅ Zero applications with incomplete detail structure  
 ✅ All required icons present (💾, 📈, 👥, 🕒)
 ✅ No applications listed with just status line
+🚨 NO hardcoded organization names (ANA, kiet.yap, B2B Partner Manager)
+🚨 ALL organization names match current session scope from Step 0
+```
+
+##### 4.6.5: Hardcoded Organization Name Prevention
+```
+🚨 MANDATORY SCAN: Before saving report, scan for hardcoded organization names
+
+FORBIDDEN PATTERNS (MUST NOT EXIST IN FINAL REPORT):
+❌ "ANA" (unless this is actually your organization name)
+❌ "kiet.yap" (unless this is actually your organization name)  
+❌ "B2B Partner Manager" (unless this is actually your organization name)
+
+VALIDATION PROCESS:
+1. Search report content for forbidden organization names
+2. Cross-reference ALL organization names with Step 0 session validation
+3. Ensure ONLY organizations from your current session appear in report
+
+If ANY forbidden names found:
+  → STOP report generation immediately
+  → Investigate why hardcoded names appeared
+  → Re-run workflow from Step 0 with fresh session validation
+  → Only proceed when report contains ONLY your session organizations
 ```
 
 ---
